@@ -18,6 +18,7 @@ const Dashboard: any = () => {
         />
       </Header>
       <CustomHeader>{t('dashboard.header')}</CustomHeader>
+      Hi, I am Saeed Ahmad
     </MainWrapper>
   );
 };
