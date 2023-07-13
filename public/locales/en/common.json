@@ -1,0 +1,158 @@
+{
+  "login": {
+    "login": "Login",
+    "description": "Visualize your department data - Login to D-Visual's by NTDC Now!",
+    "dontHaveAccount": "Don't have an account?",
+    "signup": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "keepMeIn": "Keep me signed in",
+    "forgotPassword": "Forgot Password?",
+    "email_sent": "We have sent you a verification email. Please verify your email address to start using your account"
+  },
+  "errors": {
+    "generalError": "Something went wrong!",
+    "email_required": "Email is required",
+    "password_required": "Password is required",
+    "invalid_email": "Please enter a valid email",
+    "invalid_location": "Please enter valid location message",
+    "verification_error": "Verification code is required",
+    "verification_error_length": "Verification code must be at least 4 characters long",
+    "INVALID_USERNAME_PASSWORD": "Invalid email or password",
+    "password_dont_match": "Passwords do not match",
+    "password_weak": "Try creating a stronger password",
+    "firstName_required": "First Name required",
+    "name_validation": "Name should contain letters only",
+    "lastName_required": "Last Name required",
+    "phoneNo_required": "Phone Number required",
+    "invalid_phone": "Please enter a valid phone number",
+    "organizationLogo_required": "Organization Logo required",
+    "organizationName_required": "Organization name is required",
+    "location_required": "Please enter your organization location",
+    "date_of_birth_required": "Date of Birth is required",
+    "current_password_required": "Current Password is required",
+    "new_password_required": "New Password is required",
+    "confirm_password_required": "Please confirm your password",
+    "EMAIL_ALREADY_IN_USE": "An account with this email already exists",
+    "SOMETHING_WENT_WRONG": "Something went wrong",
+    "USER_NOT_FOUND": "We couldn't find an account with this email",
+    "password_require": "Please enter you organization password",
+    "organizationName_require": "Please enter a name for your organization",
+    "address_require": "Please enter organization address",
+    "projectJobNumber_required": "Project Job Number is required",
+    "title_required": "Event Name is required",
+    "budget_required": "Budget is required",
+    "currency_required": "Currency is required",
+    "category_required": "Category is required",
+    "clientName_required": "Client Name is required",
+    "country_required": "Country is required",
+    "city_required": "City is required",
+    "venueName_required": "Venue Name is required",
+    "start_required": "Event Start Date is required",
+    "end_required": "Event End Date is required",
+    "estimatedInPersonAttendies_required": "Total Attendee Number is required",
+    "estimatedVirtualAttendies_required": "Virtual Attendee Number is required",
+    "venueType_required": "Venue Type is required",
+    "industryType_required": "Industry Type is required",
+    "estimatedCrewMembers_required": "Crew Memeber Number is required",
+    "summary_required": "Brief Summary of Activities are required",
+    "past_start_date": "Start date must be atleast 1 day in the future",
+    "past_end_date": "End date must be after start date",
+    "clientId_required": "Please select a client name",
+    "invalid_file": "Please upload a PNG, JPG or JPEG file"
+  },
+  "sidebar": {
+    "logo_header": "NTDC",
+    "logo_Subheader": "By NTDC",
+    "dashboard": "Dashboard",
+    "finance": "Finance",
+    "HR": "Human Resources (HR)",
+    "inventory": "Inventory / SCM",
+    "projectSystem": "Project System",
+    "assetMaintainence": "Asset Maintenance"
+  },
+  "confirmOTP": {
+    "confirmOTP": "Confirm OTP",
+    "heading": "Phone Verification",
+    "description": "Protect your account by verifying your phone number. Please enter the OTP code sent to your mobile device to complete the verification process.",
+    "edit_phone": "Edit phone?",
+    "resend_code": "Resend Code",
+    "verify_phone": "VERIFY PHONE"
+  },
+  "setPassword": {
+    "setpassword": "Set Password",
+    "description": "Your are Invited by “D-Visual's” via email please setup your credentials and start your experience now.",
+    "email": "Your Email",
+    "label": "Email not changeable.",
+    "password": "Password",
+    "strength": "Strength",
+    "good": "Good",
+    "week": "Weak",
+    "medium": "Medium",
+    "confirmPassword": "Confirm Password",
+    "verified": "Your Email has been verified",
+    "notVerified": "There was an error verifying your email",
+    "backToHome": "Back to home"
+  },
+  "forgotPassword": {
+    "header": "Recover your account",
+    "description": "Enter your D-Visual's email address below to receive a recovery email.",
+    "btntext": "SEND LINK",
+    "email": "Your Email",
+    "email_sent": "We sent you an email with a link to reset your password. Please check your inbox for further instructions."
+  },
+  "resetPassword": {
+    "header": "Set New Password",
+    "description": "Enter your new password for login",
+    "btntext": "Set Password",
+    "error_verify_email": "Error!",
+    "error_verify_email_description": "There was an error while verifying your email.",
+    "email_verified": "That's all!",
+    "email_verified_description": "Your email has been verified! You can now log in to start using D-Visual's.",
+    "error": "Error!",
+    "resetPassword": "Reset Password",
+    "error_description": "There was an error. Please make sure the link is correct and still valid",
+    "password_changed": "Your password was updated"
+  },
+
+  "inventory": {
+    "FirstLinkText": "Home",
+    "breadcrumbFirstLinkText": "Inventory",
+    "header": "Inventory / SCM"
+  },
+  "hr": {
+    "header": "Human Resource",
+    "breadcrumbFirstLinkText": "Home",
+    "breadcrumbSecondText": "Human Resource",
+    "breadcrumbThirdTextOrganization": "All",
+    "new_event": "New Event",
+    "create_event": "Create New Event",
+    "back": "Back"
+  },
+  "finance": {
+    "breadcrumbFirstLinkText": "Home",
+    "breadcrumbSecondText": "Finance",
+    "breadcrumbThirdTextOrganization": "All",
+    "header": "Finance",
+    "event_format": "Event Format",
+    "in_person": "In Person"
+  },
+  "projectSystem": {
+    "breadcrumbFirstLinkText": "Home",
+    "breadcrumbSecondText": "Project System",
+    "header": "Project System",
+    "dates": "Dates",
+    "location": "Event Location",
+    "organizations": "Organizations"
+  },
+  "assetMaintainance": {
+    "breadcrumbFirstLinkText": "Home",
+    "breadcrumbSecondText": "Asset Maintainance",
+    "header": "Asset Maintainance"
+  },
+  "dashboard": {
+    "header": "Welcome To D-Visual's Dashboard",
+    "breadcrumbFirstLink": "Home",
+    "text": "Dashboard"
+  }
+}

@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./Montserrat-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url('./SourceSansPro-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gabriola';
+  src: url('./Gabriola.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
