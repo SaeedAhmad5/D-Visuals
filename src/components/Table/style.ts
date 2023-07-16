@@ -1,20 +1,6 @@
 import styled from 'styled-components';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
-import { EVENT_STATUS_UPCOMING, EVENT_STATUS_COMPLETED } from '@EventZeroHuddle/ts-constants/dist/events';
-
-import { theme } from '@/styles/theme';
-
-const STATUS_TO_COLORS: any = {
-  [EVENT_STATUS_UPCOMING]: {
-    color: theme.colors.black,
-    background: theme.colors.borderColor,
-  },
-  [EVENT_STATUS_COMPLETED]: {
-    color: theme.colors.goblin,
-    background: theme.colors.lightGreen,
-  },
-};
 
 export interface RowDataInterface {
   eventname: string;
@@ -49,14 +35,15 @@ export const TableRowCellStyled = styled(TableCell)<{ $isStatus?: boolean; $stat
     line-height: 1rem;
     letter-spacing: 0.25px;
     text-align: left;
+    background-color: ${({ theme }) => theme.colors.borderColor};
+    color: ${({ theme }) => theme.colors.borderColor};
   }
 
-  ${({ $isStatus, $status }) =>
+  ${({ $isStatus }) =>
     $isStatus &&
     `
      & > p {
-      background-color: ${STATUS_TO_COLORS[$status || '']?.background};
-      color: ${STATUS_TO_COLORS[$status || '']?.color};
+      
       width: max-content;
       padding: 7px 13px;
       border-radius: 50px;
