@@ -5,8 +5,6 @@ import { useFormik } from 'formik';
 
 import TextInput from '@/components/Input';
 import Button from '@/components/Button';
-import { selectIsAuthLoading } from '@/redux/slices/auth/selectors';
-import { useAppSelector } from '@/redux';
 
 import { FormContainer, LoginButtonWrapper } from './styles';
 import { validationScheme } from './scheme';
@@ -28,8 +26,6 @@ const initialValues = {
 
 const LoginForm = ({ onSubmitHandler }: PropTypes) => {
   const { t } = useTranslation('common');
-
-  const loading = useAppSelector(selectIsAuthLoading);
 
   const { values, touched, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues,
@@ -63,10 +59,9 @@ const LoginForm = ({ onSubmitHandler }: PropTypes) => {
         feedback={errors.password}
         type='password'
         dataTestId='password-input'
-        afterLabelLink={<Link href={'/forgot-password'}>{t('login.forgotPassword')}</Link>}
       />
       <LoginButtonWrapper>
-        <Button loading={loading} dataTestId='submit-button' type='submit'>
+        <Button loading={false} dataTestId='submit-button' type='submit'>
           {t('login.login')}
         </Button>
       </LoginButtonWrapper>
