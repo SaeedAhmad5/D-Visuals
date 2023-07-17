@@ -50,6 +50,7 @@ const Layout = ({ children, pageProps }: { children: ReactNode; pageProps: any }
   const currentUser = USER_STATE_INIT;
   const [isLoading, setIsLoading] = useState(true);
 
+
   if (pageProps.redirect) {
     push(pageProps.path);
     return <></>;
