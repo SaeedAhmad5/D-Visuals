@@ -4,9 +4,6 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import AuthPageWrapper from '@/components/AuthPageWrapper';
-import { login } from '@/redux/slices/auth/thunks';
-import { useAppDispatch } from '@/redux';
-import { selectIsAuthError } from '@/redux/slices/auth/selectors';
 import { useSnack } from '@/hooks/snack';
 
 import Verified from '../SetPassword/Verified';
@@ -16,30 +13,15 @@ import LoginForm, { Values } from './LoginForm';
 
 const Login = () => {
   const { t } = useTranslation('common');
-  const dispatch = useAppDispatch();
   const { push } = useRouter();
 
   const [emailNotVerified, setEmailNotVerified] = useState(false);
 
-  useSnack(selectIsAuthError);
-
   /* eslint-disable */
+  // useSnack(false);
+
   const handleSubmit: (values: Values) => Promise<void> = async (values: Values) => {
-    const resp: any = await dispatch(
-      login({
-        username: values.email,
-        password: values.password,
-      })
-    );
-
-    if (resp.payload?.message === 'EMAIL_NOT_VERIFIED') {
-      setEmailNotVerified(true);
-      return;
-    }
-
-    if (!resp?.error && !resp?.payload?.error && !resp?.payload?.payload?.error) {
-      push('/dashboard');
-    }
+    console.log(values);
   };
 
   return (
@@ -58,7 +40,7 @@ const Login = () => {
         ) : (
           <>
             <TextContainer>
-              <h4>{t('login.login')}</h4>
+              <h4 style={{ textAlign: 'center', fontSize: '25px' }}>{t('login.login')}</h4>
               <p>{`${t('login.description')}`}</p>
             </TextContainer>
             <LoginForm onSubmitHandler={handleSubmit} />

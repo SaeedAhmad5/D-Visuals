@@ -32,6 +32,7 @@ export const Logo = styled.div`
   width: 275px;
   flex-shrink: 0;
   position: relative;
+  left: -25px;
 `;
 
 export const BottomText = styled.p`
