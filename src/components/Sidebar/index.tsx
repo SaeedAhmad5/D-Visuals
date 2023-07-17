@@ -19,6 +19,8 @@ import {
   ListTextStyled,
   BottomLogoContainer,
   StyledListItemIcon,
+  BottomTextPoweredBy,
+  BottomTextNTDC,
 } from './style';
 
 interface ItemProp extends ListItemProps {
@@ -83,8 +85,15 @@ const Sidebar: React.FC = () => {
           to='/asset_maintainance'
         />
       </List>
+      
       <BottomLogoContainer>
-        <Image src={'/Sidebar/ntdc_logo.png'} alt='event_zero_logo' layout='fill' objectFit='contain' />
+      <BottomTextPoweredBy>
+        Powered By
+      </BottomTextPoweredBy>
+        <Image src={'/Sidebar/ntdc_logo.png'} alt='event_zero_logo' layout='fill' objectFit='contain'  />
+      <div>
+        <BottomTextNTDC>National Transmission Despatch Company</BottomTextNTDC>
+        </div>
       </BottomLogoContainer>
     </SidebarDrawer>
   );
