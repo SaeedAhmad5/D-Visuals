@@ -7,14 +7,33 @@ export const drawerWidth = 325;
 export const LogoContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 1.3rem;
 `;
 export const BottomLogoContainer = styled.div`
+  display: flex;
   position: absolute;
   bottom: 2.5%;
   width: 156px;
   height: 65px;
+  &>span>img{
+    left:-81px !important;
+  }
+`;
+export const BottomTextPoweredBy = styled.span`
+  color:${({ theme }) => theme.colors.lightGreen};
+  position: absolute;
+  top: -30px;
+  
+`;
+export const BottomTextNTDC = styled.span`
+  color:${({ theme }) => theme.colors.white};
+  top: 10px;
+    position: absolute;
+    left: 85px;
+    width: 150px;
+    font-size: 16px;
+  
 `;
 
 export const Icons = styled.div`

@@ -53,7 +53,7 @@ const Layout = ({ children, pageProps }: { children: ReactNode; pageProps: any }
   const { push } = useRouter();
   const currentUser: StateUser = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
-
+console.log(currentUser)
   useEffect(() => {
     if (currentUser === USER_STATE_INIT) {
       dispatch(fetchCurrentUser({}));
