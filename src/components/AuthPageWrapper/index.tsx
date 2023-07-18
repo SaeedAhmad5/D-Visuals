@@ -15,7 +15,7 @@ const AuthPageWrapper = ({ children }: PropTypes) => {
       </AuthImage>
 
       <Logo>
-        <Image alt='NTDC_logo' src={'/Sidebar/ntdc_logo.png'} layout='fill' objectFit='contain' />
+        <Image alt='NTDC_logo' src={'/Sidebar/NTDC.png'} layout='fill' objectFit='contain' />
       </Logo>
       <ContentContainer>{children}</ContentContainer>
     </AuthPageContainer>
