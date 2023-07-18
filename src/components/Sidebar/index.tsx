@@ -3,6 +3,8 @@ import { List, ListItemProps } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssessmentIcon from '@mui/icons-material/Assessment';
@@ -65,9 +67,11 @@ const Sidebar: React.FC = () => {
       }}
     >
       <LogoContainer>
+        <Link href={'/dashboard'}>
         <Logo>
           <Image alt='organization_logo' src={'/Sidebar/NTDC.png'} layout='fill' objectFit='contain' />
         </Logo>
+        </Link>
       </LogoContainer>
       <List>
         <SidebarItem ico={<DashboardIcon sx={{ color: '#fff' }} />} label={t('sidebar.dashboard')} to='/dashboard' />
