@@ -1,13 +1,9 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { CircularProgress } from '@mui/material';
 
-import { useAppDispatch, useAppSelector } from '@/redux';
-import { selectCurrentUser } from '@/redux/slices/auth/selectors';
-import { StateUser } from '@/redux/slices/auth/slice';
 import { USER_STATE_INIT } from '@/constants/auth';
-import { fetchCurrentUser } from '@/redux/slices/auth/thunks';
 import { FlexRowContentContainer } from '@/components/styles';
 
 import Sidebar from '../Sidebar';
@@ -51,21 +47,28 @@ export const FullScreenLoader = () => (
 
 const Layout = ({ children, pageProps }: { children: ReactNode; pageProps: any }) => {
   const { push } = useRouter();
-  const currentUser: StateUser = useAppSelector(selectCurrentUser);
-  const dispatch = useAppDispatch();
-console.log(currentUser)
-  useEffect(() => {
-    if (currentUser === USER_STATE_INIT) {
-      dispatch(fetchCurrentUser({}));
-    }
-  }, [currentUser]);
+  const currentUser = USER_STATE_INIT;
+  const [isLoading, setIsLoading] = useState(true);
+
 
   if (pageProps.redirect) {
     push(pageProps.path);
     return <></>;
   }
 
-  if (currentUser === USER_STATE_INIT) {
+  useEffect(() => {
+    if (currentUser === USER_STATE_INIT) {
+      const timeoutId = setTimeout(() => {
+        setIsLoading(false);
+      }, 3000);
+
+      return () => clearTimeout(timeoutId);
+    } else {
+      setIsLoading(false);
+    }
+  }, [currentUser]);
+
+  if (isLoading) {
     return <FullScreenLoader />;
   }
 
