@@ -42,7 +42,7 @@ export const Icons = styled.div`
   width: 25px;
 `;
 export const Logo = styled.div`
-  height: 50px;
+  height: 85px;
   position: relative;
   width: 150px;
 `;
