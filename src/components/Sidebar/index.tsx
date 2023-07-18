@@ -66,7 +66,7 @@ const Sidebar: React.FC = () => {
     >
       <LogoContainer>
         <Logo>
-          <Image alt='organization_logo' src={'/Sidebar/ntdc_logo.png'} layout='fill' objectFit='contain' />
+          <Image alt='organization_logo' src={'/Sidebar/NTDC.png'} layout='fill' objectFit='contain' />
         </Logo>
       </LogoContainer>
       <List>
@@ -90,7 +90,7 @@ const Sidebar: React.FC = () => {
       <BottomTextPoweredBy>
         Powered By
       </BottomTextPoweredBy>
-        <Image src={'/Sidebar/ntdc_logo.png'} alt='event_zero_logo' layout='fill' objectFit='contain'  />
+        <Image src={'/Sidebar/NTDC.png'} alt='event_zero_logo' layout='fill' objectFit='contain'  />
       <div>
         <BottomTextNTDC>National Transmission Despatch Company</BottomTextNTDC>
         </div>
