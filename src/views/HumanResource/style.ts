@@ -19,7 +19,16 @@ export const TableWrapper = styled.div`
   width: 100%;
   height: 100vh;
 `;
-
+export const CardsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 4rem;
+  flex-wrap: wrap;
+`;
+export const ScopeCardsWrapper = styled(CardsWrapper)`
+  width: 100%;
+`;
 export const FlexRowStyled = styled.div`
   display: flex;
   flex-direction: row;

@@ -15,6 +15,7 @@ declare module 'styled-components' {
       errorLight: string;
       warning: string;
       darkGrey: string;
+      lightGoblin: string;
     };
   }
 }
