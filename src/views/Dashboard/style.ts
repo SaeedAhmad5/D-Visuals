@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
-  gap: 1rem;
+  gap: 4rem;
 `;
 export const ScopeCardsWrapper = styled(CardsWrapper)`
   width: 100%;
