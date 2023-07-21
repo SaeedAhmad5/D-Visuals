@@ -127,7 +127,15 @@
     "breadcrumbThirdTextOrganization": "All",
     "new_event": "New Event",
     "create_event": "Create New Event",
-    "back": "Back"
+    "back": "Back",
+    "pieChartTitle": "Gender",
+    "barChartTitle": "Employees Record",
+    "activeEmployee": "Active Employees",
+    "retiredEmployee": "Retired Employees",
+    "resignedEmployee": "Resigned Employees",
+    "totalEmployee": "Total Employees",
+    "captionLineChart": "Employees record per ",
+    "employeeService": "Employee Service Record "
   },
   "finance": {
     "breadcrumbFirstLinkText": "Home",

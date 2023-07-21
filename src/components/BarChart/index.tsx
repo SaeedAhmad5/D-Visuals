@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ComposedChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { ComposedChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LabelList } from 'recharts';
 import { useTranslation } from 'next-i18next';
 
 const ChartContainer = styled(ResponsiveContainer)`
@@ -9,13 +9,13 @@ const ChartContainer = styled(ResponsiveContainer)`
 `;
 const ChartWrapper = styled.div`
   position: relative;
-  height: 90%; // Set the height of the chart container
+  height: 260px;
+  padding-right: 3rem;
 `;
 
 const Caption = styled.p`
-  position: absolute;
-  bottom: -2rem;
-  left: 60%;
+  position: relative;
+  left: 65%;
   transform: translateX(-50%);
   width: 100%;
   font-style: normal;
@@ -24,64 +24,23 @@ const Caption = styled.p`
   line-height: 120%;
   text-align: center;
   letter-spacing: 0.25px;
+  bottom: 15px;
 `;
 
-const Barchart: React.FC = () => {
+type DataTypes = {
+  name: string;
+  No: number;
+};
+interface PropTypes {
+  data: DataTypes[];
+  barsize?: number | undefined;
+  isActive?: boolean;
+  label?: boolean;
+}
+
+const Barchart = ({ data, barsize, isActive, label }: PropTypes) => {
   const { t } = useTranslation('common');
-  const data = [
-    {
-      name: `${t('linechart.activities')}`,
-      pv: 80,
-    },
-    {
-      name: `${t('linechart.accomodation')}`,
-      pv: 79,
-    },
-    {
-      name: `${t('linechart.services')}`,
-      pv: 60,
-    },
-    {
-      name: `${t('linechart.food')}`,
-      pv: 40,
-    },
-    {
-      name: `${t('linechart.product')}`,
-      pv: 19,
-    },
-    {
-      name: `${t('linechart.printedmaterial')}`,
-      pv: 60,
-    },
-    {
-      name: `${t('linechart.venue')}`,
-      pv: 50,
-    },
-    {
-      name: `${t('linechart.miscellaneous')}`,
-      pv: 30,
-    },
-    {
-      name: `${t('linechart.p&bitems')}`,
-      pv: 70,
-    },
-    {
-      name: `${t('linechart.travel')}`,
-      pv: 68,
-    },
-    {
-      name: `${t('linechart.waste')}`,
-      pv: 80,
-    },
-    {
-      name: `${t('linechart.transportaion')}`,
-      pv: 60,
-    },
-    {
-      name: `${t('linechart.virtual')}`,
-      pv: 68,
-    },
-  ];
+
   return (
     <ChartWrapper>
       <ChartContainer>
@@ -91,26 +50,31 @@ const Barchart: React.FC = () => {
           min-height={250}
           data={data}
           margin={{
-            left: 60,
+            left: 40,
+            right: 20,
           }}
         >
-          <XAxis type='number' axisLine={false} tickLine={false} />
+          <XAxis type='number' axisLine={false} tickLine={false} tickFormatter={() => ''} />
           <YAxis
             dataKey='name'
             type='category'
             axisLine={false}
             tickLine={false}
-            width={160}
+            width={180}
             fontSize={11}
             tickFormatter={value => value.toUpperCase()}
             fontWeight={400}
             fontFamily='Montserrat'
           />
           <Tooltip />
-          <Bar dataKey='pv' barSize={15} fill='#80CC28' />
+          {isActive && <CartesianGrid horizontal={false} />}
+
+          <Bar dataKey='No' barSize={barsize || 15} fill='#80CC28'>
+            {label && <LabelList dataKey='No' position='right' fill='#555' />}
+          </Bar>
         </ComposedChart>
       </ChartContainer>
-      <Caption> {t('linechart.caption')}</Caption>
+      <Caption> {t('hr.captionLineChart')}</Caption>
     </ChartWrapper>
   );
 };

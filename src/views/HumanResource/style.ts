@@ -92,3 +92,7 @@ export const ButtonWrapper = styled.div`
     height: 37px;
   }
 `;
+export const ChartHead = styled.div`
+  display: flex;
+  align-items: center;
+`;
