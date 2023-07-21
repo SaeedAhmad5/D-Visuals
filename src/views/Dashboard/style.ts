@@ -1,5 +1,17 @@
 import styled from 'styled-components';
 
+
+export const CardsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 4rem;
+`;
+export const ScopeCardsWrapper = styled(CardsWrapper)`
+  width: 100%;
+`;
+
 export const FormolaBoxStyles = styled.div`
   min-width: 550px;
   width: 100%;
