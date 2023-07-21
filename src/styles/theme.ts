@@ -28,7 +28,7 @@ export const theme = {
     errorLight: '#fda29b',
     warning: '#ffb800',
     darkGrey: '#969696',
-    lightGoblin: '#1b4001d1'
+    lightGoblin: '#1b4001d1',
   },
   ...muiTheme,
 };

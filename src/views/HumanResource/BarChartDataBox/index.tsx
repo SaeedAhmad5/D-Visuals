@@ -14,15 +14,9 @@ const BarCharDataBox = () => {
       <LeftDataWrapper>
         <DataWrapper>
           <h6>
-            419.99 <span>(tCO2e)</span>
+            Employee Service <span>(record)</span>
           </h6>
-          <p>{t('linechart.totalemission')}</p>
-        </DataWrapper>
-        <DataWrapper>
-          <h6>
-            25 <span>(tCO2e)</span>
-          </h6>
-          <p>{t('linechart.averagemission')}</p>
+          <p>{t('hr.employeeService')}</p>
         </DataWrapper>
       </LeftDataWrapper>
       <div>

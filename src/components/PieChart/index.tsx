@@ -1,23 +1,68 @@
 import React from 'react';
-import { PieChart, Pie, Cell, ResponsiveContainer, Label, Line } from 'recharts';
+import styled from 'styled-components';
+import { PieChart, Pie, Cell, ResponsiveContainer, Label, Line, Tooltip, Legend } from 'recharts';
 
-const PieChartData: React.FC = () => {
-  const data = [
-    { name: 'Food ^ Beverage', value: 400 },
-    { name: 'Travel & Transport', value: 300 },
-    { name: 'Energy', value: 250 },
-    { name: 'Waste', value: 200 },
-    { name: 'Production', value: 200 },
-  ];
+const ChartContainer = styled(ResponsiveContainer)<{ $margin?: boolean }>`
+  display: flex;
+  justify-content: center;
+  height: 315px !important;
+  margin: ${props => (props.$margin ? '0' : '5px 0')};
+`;
+const ChartSvg = styled(PieChart)`
+  width: 300px !important;
+  height: 310px !important;
+  & > svg {
+    width: 300px;
+    height: 278px;
+  }
+`;
+type DataTypes = {
+  name: string;
+  value: number;
+  dy: number;
+  color: string;
+};
+interface PropTypes {
+  data: DataTypes[];
+  colors: string[];
+  hideInnerRadius?: boolean;
+  noMargin?: boolean;
+}
 
-  const COLORS = ['#80CC28', '#DD7596', '#1B4001', '#010101', '#C59CA0'];
+const PieChartData = ({ colors, data, hideInnerRadius, noMargin }: PropTypes) => {
+  const RADIAN = Math.PI / 180;
+
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    const highestPercentage = Math.max(...data.map(item => item.value));
+    const textColor = percent === highestPercentage ? '#fffff' : '#000000';
+
+    return (
+      <>
+        <text x={x} y={y} fill={textColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline='central'>
+          {`${(percent * 100).toFixed(0)}%`}
+        </text>
+      </>
+    );
+  };
 
   return (
     <>
-      <ResponsiveContainer width='100%' height='100%'>
-        <PieChart>
-          <Pie data={data} cx='50%' cy='50%' label outerRadius={160} innerRadius={80} fill='#8884d8' dataKey='value'>
-            <Label value='420' position='center' fontSize={49} fontWeight={500} fill='#161616' dy={-10} />
+      <ChartContainer minHeight={400} width={hideInnerRadius ? '64%' : '100%'} $margin={noMargin}>
+        <ChartSvg>
+          <Pie
+            dataKey='value'
+            data={data}
+            cx='50%'
+            cy='50%'
+            label={hideInnerRadius ? renderCustomizedLabel : undefined}
+            outerRadius={180}
+            innerRadius={hideInnerRadius ? 0 : 90}
+            fill='#8884d8'
+          >
             <Line
               type='linear'
               dataKey='name'
@@ -25,13 +70,30 @@ const PieChartData: React.FC = () => {
               strokeWidth={1}
               label={<Label fill='#333' fontSize={12} fontWeight={500} />}
             />
-            <Label value='tco2' position='center' fontSize={16} fontWeight={500} fill='#161616' dy={20} />
+            {!hideInnerRadius && (
+              <>
+                {data.map(item => (
+                  <Label
+                    key={`label-${item.name}`}
+                    value={`${item.name}: ${item.value}`}
+                    position='center'
+                    fontSize={30}
+                    fontWeight={500}
+                    fill={item.color}
+                    dy={item.dy}
+                  />
+                ))}
+              </>
+            )}
+
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke='none' strokeWidth={0} />
+              <Cell key={`cell-${index}`} fill={colors[index % colors.length]} stroke='none' strokeWidth={0} />
             ))}
           </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+          <Legend layout='horizontal' align='center' verticalAlign='bottom' />
+          <Tooltip />
+        </ChartSvg>
+      </ChartContainer>
     </>
   );
 };
