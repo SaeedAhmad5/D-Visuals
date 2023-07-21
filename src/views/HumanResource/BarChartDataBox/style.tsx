@@ -7,15 +7,20 @@ export const BoxWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  height: 80px;
   background: #ececec;
   border-radius: 12px;
+
+  @media only screen and (max-width: 1200px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const LeftDataWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+  min-width: fit-content;
 `;
 
 export const DataWrapper = styled.div`
@@ -34,8 +39,7 @@ export const DataWrapper = styled.div`
     color: ${({ theme }) => theme.colors.black};
 
     & > span {
-      //styleName: Body;
-      font-family: Source Sans Pro;
+      font-family: Montserrat;
       font-size: 14px;
       font-weight: 400;
       line-height: 17px;
@@ -57,6 +61,7 @@ export const DataWrapper = styled.div`
 `;
 
 export const CustomTabs = styled(Tabs)`
+  border-radius: 10px;
   & .MuiTab-root {
     text-transform: none;
     color: ${({ theme }) => theme.colors.goblin};
@@ -65,10 +70,10 @@ export const CustomTabs = styled(Tabs)`
     font-weight: 400;
     line-height: 1rem;
     letter-spacing: 0.25px;
-    min-height: 2.6rem !important;
+    /* min-height: 2.6rem !important; */
     background: ${({ theme }) => theme.colors.white};
-    border: 1px solid ${({ theme }) => theme.colors.borderColor};
-    border-collapse: collapse;
+
+    /* border-collapse: collapse; */
   }
 
   & .MuiTab-root.Mui-selected {
@@ -76,14 +81,13 @@ export const CustomTabs = styled(Tabs)`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-radius: 0px 6px 6px 0px;
-    padding: 7px 13.125px 7px 12px;
+    padding: 7px 13 7px 12px;
     color: ${({ theme }) => theme.colors.white};
-    border: 1px solid ${({ theme }) => theme.colors.goblin};
     background: ${({ theme }) => theme.colors.goblin};
   }
 `;
 export const CustomTab = styled(Tab)`
+  font-family: SourceSansPro;
   display: flex;
   align-items: center;
   justify-content: center;

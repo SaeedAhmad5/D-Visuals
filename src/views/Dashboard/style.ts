@@ -1,15 +1,5 @@
 import styled from 'styled-components';
 
-export const CardsWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 1rem;
-`;
-export const ScopeCardsWrapper = styled(CardsWrapper)`
-  width: 100%;
-`;
-
 export const FormolaBoxStyles = styled.div`
   min-width: 550px;
   width: 100%;
@@ -46,14 +36,14 @@ export const ChartWrapper = styled.div`
   align-items: center;
   gap: 1rem;
   width: 100%;
-  height: 600px;
+  height: 465px;
 `;
 
 export const PieChartWrapper = styled.div`
   box-sizing: border-box;
   padding: 19px 26px;
-  width: 40%;
-  min-height: 450px;
+  width: 35%;
+  min-height: 405px;
   height: 100%;
   background: ${({ theme }) => theme.colors.white};
   border: 1px dashed ${({ theme }) => theme.colors.borderColor};
@@ -62,8 +52,8 @@ export const PieChartWrapper = styled.div`
 
 export const GenericTitle = styled.h4`
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 18px;
   line-height: 19px;
   color: ${({ theme }) => theme.colors.black};
 `;
