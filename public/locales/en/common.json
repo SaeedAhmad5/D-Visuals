@@ -94,27 +94,6 @@
     "notVerified": "There was an error verifying your email",
     "backToHome": "Back to home"
   },
-  "forgotPassword": {
-    "header": "Recover your account",
-    "description": "Enter your D-Visual's email address below to receive a recovery email.",
-    "btntext": "SEND LINK",
-    "email": "Your Email",
-    "email_sent": "We sent you an email with a link to reset your password. Please check your inbox for further instructions."
-  },
-  "resetPassword": {
-    "header": "Set New Password",
-    "description": "Enter your new password for login",
-    "btntext": "Set Password",
-    "error_verify_email": "Error!",
-    "error_verify_email_description": "There was an error while verifying your email.",
-    "email_verified": "That's all!",
-    "email_verified_description": "Your email has been verified! You can now log in to start using D-Visual's.",
-    "error": "Error!",
-    "resetPassword": "Reset Password",
-    "error_description": "There was an error. Please make sure the link is correct and still valid",
-    "password_changed": "Your password was updated"
-  },
-
   "inventory": {
     "FirstLinkText": "Home",
     "breadcrumbFirstLinkText": "Inventory",
@@ -130,12 +109,23 @@
     "back": "Back",
     "pieChartTitle": "Gender",
     "barChartTitle": "Employees Record",
+    "ageBarChartTitle": "Number of Employee by Age Group",
     "activeEmployee": "Active Employees",
-    "retiredEmployee": "Retired Employees",
-    "resignedEmployee": "Resigned Employees",
+    "attritionCount": "Attrition Count",
+    "avgAge": "Average Age",
     "totalEmployee": "Total Employees",
     "captionLineChart": "Employees record per ",
-    "employeeService": "Employee Service Record "
+    "employeeService": "Employee Service Record ",
+    "jobSatisficationRatingTitle": "Job Satisfication Rating",
+    "educationWiseAttrition": "Education Wise Attrition",
+    "laborEffectiveness": "Overall Labor Effectiveness(OLE) ",
+    "oleCap": "OLE Over The Last 5 Years",
+    "departmentLaborEffectiveness": "OLE By Department",
+    "contractPermanent": "Contract vs Permanent Employees",
+    "timeQuit": "Time To Quit The Job",
+    "timeQuitCap": "(Employees are most likely to leave their job around their one-year work anniversary)",
+    "attritionGenderTitle": "Attrition Rate by Gender for Different Age Group",
+    "departmentWiseAttrition": "Department Wise Attrition "
   },
   "finance": {
     "breadcrumbFirstLinkText": "Home",
@@ -161,5 +151,9 @@
     "header": "Welcome To D-Visual's Dashboard",
     "breadcrumbFirstLink": "Home",
     "text": "Dashboard"
-  }
+  },
+  "Total_Employee": "Total Employees",
+  "Active_Employee": "Active Employees",
+  "Retired_Employee": "Retired Employees",
+  "Resigned_Employee": "Resigned Employees"
 }

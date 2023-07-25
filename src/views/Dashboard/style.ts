@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -48,13 +47,13 @@ export const ChartWrapper = styled.div`
   align-items: center;
   gap: 1rem;
   width: 100%;
-  height: 465px;
+  flex-wrap: wrap;
 `;
 
 export const PieChartWrapper = styled.div`
   box-sizing: border-box;
   padding: 19px 26px;
-  width: 35%;
+  width: 330px;
   min-height: 405px;
   height: 100%;
   background: ${({ theme }) => theme.colors.white};
@@ -70,19 +69,21 @@ export const GenericTitle = styled.h4`
   color: ${({ theme }) => theme.colors.black};
 `;
 
-export const LineChartWrapper = styled(PieChartWrapper)`
-  min-height: 450px;
+export const LineChartWrapper = styled(PieChartWrapper)<{ $width?: string; $height?: boolean }>`
+  min-height: 465px;
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 20px 16px;
   gap: 1.2rem;
-  width: 60%;
+  width: ${props => props.$width || '905px'};
+  min-height: ${props => (props.$height ? '400px' : '465px')};
 `;
 
 export const TableWrapper = styled.div`
-  width: 100%;
-  height: max-content;
+  width: 52%;
+  padding: 20px;
+  height: 400px;
   background: ${({ theme }) => theme.colors.white};
 `;
 export const TableTitle = styled(GenericTitle)`

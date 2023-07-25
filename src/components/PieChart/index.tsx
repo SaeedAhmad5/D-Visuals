@@ -44,7 +44,15 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
 
     return (
       <>
-        <text x={x} y={y} fill={textColor} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline='central'>
+        <text
+          x={x}
+          y={y}
+          fill={textColor}
+          textAnchor={x > cx ? 'start' : 'center'}
+          dominantBaseline='central'
+          fontSize={20}
+          fontWeight={600}
+        >
           {`${(percent * 100).toFixed(0)}%`}
         </text>
       </>
@@ -53,7 +61,7 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
 
   return (
     <>
-      <ChartContainer minHeight={400} width={hideInnerRadius ? '64%' : '100%'} $margin={noMargin}>
+      <ChartContainer minHeight={400} width={'100%'} $margin={noMargin}>
         <ChartSvg>
           <Pie
             dataKey='value'
@@ -74,29 +82,29 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
             />
             {!hideInnerRadius && (
               <>
-              {!finance && data ? (
-  data.map(item => (
-    <Label
-      key={`label-${item.name}`}
-      value={`${item.name}: ${item.value}`}
-      position='center'
-      fontSize={30}
-      fontWeight={500}
-      fill={item.color}
-      dy={item.dy}
-    />
-  ))
-) : (
-  <Label
-    key={'50M'}
-    value={`50M`}
-    position='center'
-    fontSize={30}
-    fontWeight={800}
-    fill={'#10101'}
-    dy={0}
-  />
-)}
+                {!finance && data ? (
+                  data.map(item => (
+                    <Label
+                      key={`label-${item.name}`}
+                      value={`${item.name === 'Male' ? 'M' : 'F'}: ${item.value}`}
+                      position='center'
+                      fontSize={30}
+                      fontWeight={500}
+                      fill={item.color}
+                      dy={item.dy}
+                    />
+                  ))
+                ) : (
+                  <Label
+                    key={'50M'}
+                    value={'50M'}
+                    position='center'
+                    fontSize={30}
+                    fontWeight={800}
+                    fill={'#10101'}
+                    dy={0}
+                  />
+                )}
               </>
             )}
 
@@ -104,12 +112,13 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
               <Cell key={`cell-${index}`} fill={colors[index % colors.length]} stroke='none' strokeWidth={0} />
             ))}
           </Pie>
-          {!finance?
-          <Legend layout='horizontal' align='center' verticalAlign='bottom' />
-          :
-          <Legend layout='vertical' align='right' verticalAlign='bottom'/>
+          
+          {!finance ? (
+            <Legend layout='horizontal' align='center' verticalAlign='bottom' />
+          ) : (
+            <Legend layout='vertical' align='right' verticalAlign='bottom' />
+          )}
 
-          }
           <Tooltip />
         </ChartSvg>
       </ChartContainer>

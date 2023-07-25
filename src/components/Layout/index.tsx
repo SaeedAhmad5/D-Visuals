@@ -20,10 +20,6 @@ export const ScrollView = styled.div`
   position: relative;
   height: 100vh;
   overflow-y: scroll;
-
-  &::-webkit-scrollbar {
-    z-index: 10000 !important;
-  }
 `;
 
 export const Main = styled.main`
@@ -49,7 +45,6 @@ const Layout = ({ children, pageProps }: { children: ReactNode; pageProps: any }
   const { push } = useRouter();
   const currentUser = USER_STATE_INIT;
   const [isLoading, setIsLoading] = useState(true);
-
 
   if (pageProps.redirect) {
     push(pageProps.path);

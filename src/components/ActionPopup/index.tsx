@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Image from 'next/legacy/image';
 
-import { ActionImage } from '@/views/Events/style';
+import { ActionImage } from './style';
 
 const ITEM_HEIGHT = 48;
 
