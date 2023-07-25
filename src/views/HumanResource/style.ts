@@ -96,3 +96,8 @@ export const ChartHead = styled.div`
   display: flex;
   align-items: center;
 `;
+export const OleCap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
