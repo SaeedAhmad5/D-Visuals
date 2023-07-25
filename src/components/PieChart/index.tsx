@@ -112,11 +112,13 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
               <Cell key={`cell-${index}`} fill={colors[index % colors.length]} stroke='none' strokeWidth={0} />
             ))}
           </Pie>
+          
           {!finance ? (
             <Legend layout='horizontal' align='center' verticalAlign='bottom' />
           ) : (
             <Legend layout='vertical' align='right' verticalAlign='bottom' />
           )}
+
           <Tooltip />
         </ChartSvg>
       </ChartContainer>
