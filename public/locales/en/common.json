@@ -142,8 +142,7 @@
     "breadcrumbSecondText": "Finance",
     "breadcrumbThirdTextOrganization": "All",
     "header": "Finance",
-    "event_format": "Event Format",
-    "in_person": "In Person"
+    "profitPieChart": "Net Profit"
   },
   "projectSystem": {
     "breadcrumbFirstLinkText": "Home",

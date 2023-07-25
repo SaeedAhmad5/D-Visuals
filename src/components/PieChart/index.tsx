@@ -16,10 +16,11 @@ const ChartSvg = styled(PieChart)`
     height: 278px;
   }
 `;
+
 type DataTypes = {
   name: string;
   value: number;
-  dy: number;
+  dy?: number;
   color: string;
 };
 interface PropTypes {
@@ -27,9 +28,10 @@ interface PropTypes {
   colors: string[];
   hideInnerRadius?: boolean;
   noMargin?: boolean;
+  finance?: boolean;
 }
 
-const PieChartData = ({ colors, data, hideInnerRadius, noMargin }: PropTypes) => {
+const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: PropTypes) => {
   const RADIAN = Math.PI / 180;
 
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
@@ -72,17 +74,29 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin }: PropTypes) =>
             />
             {!hideInnerRadius && (
               <>
-                {data.map(item => (
-                  <Label
-                    key={`label-${item.name}`}
-                    value={`${item.name}: ${item.value}`}
-                    position='center'
-                    fontSize={30}
-                    fontWeight={500}
-                    fill={item.color}
-                    dy={item.dy}
-                  />
-                ))}
+              {!finance && data ? (
+  data.map(item => (
+    <Label
+      key={`label-${item.name}`}
+      value={`${item.name}: ${item.value}`}
+      position='center'
+      fontSize={30}
+      fontWeight={500}
+      fill={item.color}
+      dy={item.dy}
+    />
+  ))
+) : (
+  <Label
+    key={'50M'}
+    value={`50M`}
+    position='center'
+    fontSize={30}
+    fontWeight={800}
+    fill={'#10101'}
+    dy={0}
+  />
+)}
               </>
             )}
 
@@ -90,7 +104,12 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin }: PropTypes) =>
               <Cell key={`cell-${index}`} fill={colors[index % colors.length]} stroke='none' strokeWidth={0} />
             ))}
           </Pie>
+          {!finance?
           <Legend layout='horizontal' align='center' verticalAlign='bottom' />
+          :
+          <Legend layout='vertical' align='right' verticalAlign='bottom'/>
+
+          }
           <Tooltip />
         </ChartSvg>
       </ChartContainer>
