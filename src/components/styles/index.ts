@@ -33,17 +33,19 @@ export const FlexColumn = styled.div<{
   alignItems?: string;
   gap?: string;
   $margin?: string;
+  $marginTop?: string;
   $reverse?: string;
   alignSelf?: string;
 }>`
   display: flex;
   flex-direction: column;
 
-  ${({ justifyContent, alignItems, gap, $margin }) => `
+  ${({ justifyContent, alignItems, gap, $margin, $marginTop }) => `
     justify-content: ${justifyContent ? justifyContent : 'center'};
     align-items: ${alignItems ? alignItems : 'center'};
     gap: ${gap ? gap : null};
     margin: ${$margin ? $margin : null};
+    margin-top: ${$marginTop ? $marginTop : null};
   `}
 `;
 

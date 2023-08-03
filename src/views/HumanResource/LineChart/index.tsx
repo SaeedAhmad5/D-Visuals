@@ -23,9 +23,10 @@ interface PropTypes {
   data: DataTypes[];
   Cp?: boolean;
   Tq?: boolean;
+  df?: boolean;
 }
 
-const LineChartComponent = ({ data, Cp, Tq }: PropTypes) => {
+const LineChartComponent = ({ data, Cp, Tq, df }: PropTypes) => {
   const formatYAxisTick = (tickValue: number) => `${tickValue}%`;
   const tooltipFormatter: any = (value: any) => `${value}%`;
   const AreaTooltipFormatter: any = (value: any) => `${value} Year`;
@@ -35,9 +36,9 @@ const LineChartComponent = ({ data, Cp, Tq }: PropTypes) => {
       <ChartContainer>
         {!Tq ? (
           <LineChart width={500} height={300} data={data}>
-            <XAxis dataKey='year' padding={{ left: 30, right: 30 }} />
+            <XAxis dataKey={!df ? 'year' : 'month'} padding={{ left: 30, right: 30 }} />
             {!Cp ? (
-              <YAxis tickFormatter={formatYAxisTick} />
+              <YAxis tickFormatter={!df ? formatYAxisTick : null} />
             ) : (
               <>
                 <YAxis
@@ -55,7 +56,16 @@ const LineChartComponent = ({ data, Cp, Tq }: PropTypes) => {
             )}
             <Tooltip formatter={tooltipFormatter} />
             {!Cp ? (
-              <Line type='monotone' dataKey='Effectiveness' stroke='#ff0003' activeDot={{ r: 8 }} />
+              <>
+                {!df ? (
+                  <Line type='monotone' dataKey='Effectiveness' stroke='#ff0003' activeDot={{ r: 8 }} />
+                ) : (
+                  <>
+                    <Line type='monotone' dataKey='Forecasted_Demand' stroke='#ff0003' activeDot={{ r: 8 }} />
+                    <Line type='monotone' dataKey='Actual_Demand' stroke='#043db9' activeDot={{ r: 8 }} />
+                  </>
+                )}
+              </>
             ) : (
               <>
                 {' '}
@@ -63,7 +73,7 @@ const LineChartComponent = ({ data, Cp, Tq }: PropTypes) => {
                 <Line yAxisId='right' type='monotone' dataKey='permanent' stroke='#043db9' />
               </>
             )}
-            {Cp ? <Legend /> : null}
+            {!df ? Cp ? <Legend /> : null : <Legend />}
           </LineChart>
         ) : (
           <AreaChart
