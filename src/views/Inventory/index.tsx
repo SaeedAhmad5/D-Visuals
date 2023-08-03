@@ -119,9 +119,6 @@ const Inventory: any = () => {
             <div>
               <FlexColumn $marginTop={'20px'}>
                 <GraphHead>Multan Warehouse</GraphHead>
-                <GraphHead>
-                  {t('inventory.totalCapacity')} = <span>8000</span>
-                </GraphHead>
               </FlexColumn>
               <PieChartData
                 data={Warehouse_Data2}
@@ -134,9 +131,6 @@ const Inventory: any = () => {
             <div>
               <FlexColumn $marginTop={'20px'}>
                 <GraphHead>Gatti Warehouse</GraphHead>
-                <GraphHead>
-                  {t('inventory.totalCapacity')} = <span>12000</span>
-                </GraphHead>
               </FlexColumn>
               <PieChartData
                 data={Warehouse_Data3}
@@ -148,10 +142,7 @@ const Inventory: any = () => {
             </div>
             <div>
               <FlexColumn $marginTop={'20px'}>
-                <GraphHead>Jsmdhoro Warehouse</GraphHead>
-                <GraphHead>
-                  {t('inventory.totalCapacity')} = <span>6000</span>
-                </GraphHead>
+                <GraphHead>Jamshoro Warehouse</GraphHead>
               </FlexColumn>
               <PieChartData
                 data={Warehouse_Data4}

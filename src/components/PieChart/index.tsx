@@ -87,7 +87,7 @@ const PieChartData = ({
       const dataItem = payload[0].payload;
       return (
         <TooltipContainer>
-          <TooltipHead>Total Capcity: {totalCapacity}(sq. ft.)</TooltipHead>
+          <TooltipHead>Total Capcity (sq. ft.): {totalCapacity}</TooltipHead>
           <TooltipHead>
             {dataItem.name}: {dataItem.value}
           </TooltipHead>
