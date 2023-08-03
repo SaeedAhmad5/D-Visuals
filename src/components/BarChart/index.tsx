@@ -37,9 +37,10 @@ interface PropTypes {
   isActive?: boolean;
   label?: boolean;
   color?: string;
+  itemStatus?: boolean;
 }
 
-const Barchart = ({ data, barsize, isActive, label, color }: PropTypes) => {
+const Barchart = ({ data, barsize, isActive, label, color, itemStatus }: PropTypes) => {
   const { t } = useTranslation('common');
 
   return (
@@ -70,12 +71,12 @@ const Barchart = ({ data, barsize, isActive, label, color }: PropTypes) => {
           <Tooltip />
           {isActive && <CartesianGrid horizontal={false} />}
 
-          <Bar dataKey='No' barSize={barsize || 15} fill={color ? color : '#80CC28'}>
+          <Bar dataKey='No' barSize={barsize || 15} fill={color ? color : '#8884d8'}>
             {label && <LabelList dataKey='No' position='right' fill='#555' />}
           </Bar>
         </ComposedChart>
       </ChartContainer>
-      {!color ? <Caption> {t('hr.captionLineChart')}</Caption> : null}
+      {!itemStatus ? !color ? <Caption> {t('hr.captionLineChart')}</Caption> : null : null}
     </ChartWrapper>
   );
 };

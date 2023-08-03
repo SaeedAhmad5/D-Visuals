@@ -28,9 +28,17 @@ interface PropTypes {
   hideaction?: boolean;
   menuItems?: MenuItemType[];
   difference?: boolean;
+  rowWidth?: boolean;
 }
 
-const CustomTable: React.FC<PropTypes> = ({ rows, columns, hideaction, menuItems, difference }: PropTypes) => {
+const CustomTable: React.FC<PropTypes> = ({
+  rows,
+  columns,
+  hideaction,
+  menuItems,
+  difference,
+  rowWidth,
+}: PropTypes) => {
   const getTotalValues = () => {
     const rateOneCount = rows.reduce((acc, row) => {
       return acc + row.one;
@@ -59,7 +67,11 @@ const CustomTable: React.FC<PropTypes> = ({ rows, columns, hideaction, menuItems
   const totalValues = difference ? getTotalValues() : null;
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size='small' aria-label={difference ? 'a dense table' : 'simple table'}>
+      <Table
+        sx={{ minWidth: 650 }}
+        size={rowWidth ? 'medium' : 'small'}
+        aria-label={difference ? 'a dense table' : 'simple table'}
+      >
         <TableHeadStyled>
           <TableRow>
             {columns.map(column => (
