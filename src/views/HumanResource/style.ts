@@ -23,7 +23,7 @@ export const CardsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  gap: 4rem;
+  gap: 1rem;
   flex-wrap: wrap;
 `;
 export const ScopeCardsWrapper = styled(CardsWrapper)`

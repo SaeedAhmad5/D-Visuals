@@ -14,12 +14,16 @@ import { theme } from '@/styles/theme';
 import createEmotionCache from '@/common/emotionCache';
 import Layout from '@/components/Layout';
 import { wrapper } from '@/redux';
-// import configureAxios from '@/common/axiosConfig';
+import configureAxios from '@/common/axiosConfig';
 
 const clientSideEmotionCache = createEmotionCache();
 
 function App({ Component, pageProps, ...rest }: AppProps) {
   const { store } = wrapper.useWrappedStore(rest);
+
+  if (typeof window !== 'undefined') {
+    configureAxios(store);
+  }
 
   const persister = persistStore(store);
 

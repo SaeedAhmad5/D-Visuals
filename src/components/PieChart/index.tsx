@@ -42,6 +42,9 @@ interface PropTypes {
   totalProduct?: boolean;
   tooltip?: boolean;
   totalCapacity?: number;
+  filteredFemaleGenderData?: number;
+  filteredMaleGenderData?: number;
+  gender?: boolean;
 }
 
 const PieChartData = ({
@@ -53,6 +56,9 @@ const PieChartData = ({
   totalProduct,
   totalCapacity,
   tooltip,
+  filteredMaleGenderData,
+  filteredFemaleGenderData,
+  gender,
 }: PropTypes) => {
   const RADIAN = Math.PI / 180;
 
@@ -102,7 +108,9 @@ const PieChartData = ({
       <ChartContainer minHeight={400} width={'100%'} $margin={noMargin}>
         <ChartSvg>
           <Pie
-            dataKey='value'
+            dataKey={
+              !gender ? 'value' : item => (item.name === 'Male' ? filteredMaleGenderData : filteredFemaleGenderData)
+            }
             data={data}
             cx='50%'
             cy='50%'
@@ -124,7 +132,9 @@ const PieChartData = ({
                   data.map(item => (
                     <Label
                       key={`label-${item.name}`}
-                      value={`${item.name === 'Male' ? 'M' : 'F'}: ${item.value}`}
+                      value={`${item.name === 'Male' ? 'M' : 'F'}: ${
+                        item.name === 'Male' ? filteredMaleGenderData : filteredFemaleGenderData
+                      }`}
                       position='center'
                       fontSize={30}
                       fontWeight={500}

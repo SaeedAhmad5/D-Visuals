@@ -31,9 +31,12 @@ interface PropTypes {
   Count?: Boolean;
   status?: Boolean;
   stock?: Boolean;
+  inventory?: Boolean;
+  assets?: Boolean;
+  account?: Boolean;
 }
 
-const VerticlaBarChart = ({ data, Ole, Count, status, stock }: PropTypes) => {
+const VerticlaBarChart = ({ data, Ole, Count, status, stock, inventory, assets, account }: PropTypes) => {
   const tooltipFormatter: any = (value: any) => `${value}%`;
   const accountTooltip: any = (value: any) => `$${value}K`;
   const formatYAxisTick = (tickValue: number) => `$${tickValue}k`;
@@ -66,8 +69,21 @@ const VerticlaBarChart = ({ data, Ole, Count, status, stock }: PropTypes) => {
               padding={{ left: !stock ? 10 : 50, right: !stock ? 10 : 50 }}
             />
           )}
-          {!status && !stock ? <YAxis /> : null}
-          {!status ? <Tooltip formatter={!stock ? tooltipFormatter : null} /> : null}
+
+          {!status && !stock ? <YAxis tickFormatter={formatYAxisTick} /> : null}
+          <Tooltip
+            formatter={
+              !status
+                ? tooltipFormatter
+                : !inventory
+                ? !assets
+                  ? !account
+                    ? tooltipFormatter
+                    : accountTooltip
+                  : accountTooltip
+                : tooltipFormatter
+            }
+          />
           {!status ? (
             <Bar
               dataKey={!Count ? (!Ole ? 'Employees' : 'Effectiveness') : 'Count'}

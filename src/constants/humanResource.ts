@@ -2,14 +2,14 @@ export const totalEmployees: any = [
   {
     title: 'Total Emloyees',
     totalno: 859,
-    unit: 'Employee',
+    // unit: 'Employee',
   },
 ];
 export const activeEmployees: any = [
   {
     title: 'Active Emloyees',
     totalno: 500,
-    unit: 'Employee',
+    // unit: 'Employee',
   },
 ];
 export const attritionEmployees: any = [
@@ -136,7 +136,22 @@ export const agedata: any[] = [
     amt: 10,
   },
 ];
+export function categorizeEmployeesByAgeBands(employees: any[]) {
+  const ageBands = [
+    { min: 18, max: 20 },
+    { min: 21, max: 23 },
+    { min: 24, max: 26 },
+  ];
+  const categorizedEmployees = ageBands.map(ageBand => {
+    const { min, max } = ageBand;
+    const employeesInAgeBand = employees.filter(
+      (employee: { Age: number }) => employee.Age >= min && employee.Age <= max
+    );
+    return { ageBand: `${min}-${max}`, count: employeesInAgeBand.length };
+  });
 
+  return categorizedEmployees;
+}
 type departmentChartDataType = {
   name: string;
   value: number;

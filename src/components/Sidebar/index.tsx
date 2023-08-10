@@ -4,9 +4,7 @@ import { useTranslation } from 'next-i18next';
 import Image from 'next/legacy/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import WysiwygIcon from '@mui/icons-material/Wysiwyg';
@@ -68,13 +66,12 @@ const Sidebar: React.FC = () => {
     >
       <LogoContainer>
         <Link href={'/dashboard'}>
-        <Logo>
-          <Image alt='organization_logo' src={'/Sidebar/NTDC.png'} layout='fill' objectFit='contain' />
-        </Logo>
+          <Logo>
+            <Image alt='organization_logo' src={'/Sidebar/NTDC.png'} layout='fill' objectFit='contain' />
+          </Logo>
         </Link>
       </LogoContainer>
       <List>
-        <SidebarItem ico={<DashboardIcon sx={{ color: '#fff' }} />} label={t('sidebar.dashboard')} to='/dashboard' />
         <SidebarItem ico={<AccountBalanceIcon sx={{ color: '#fff' }} />} label={t('sidebar.finance')} to='/finance' />
         <SidebarItem ico={<AssessmentIcon sx={{ color: '#fff' }} />} label={t('sidebar.HR')} to='/human_resource' />
         <SidebarItem ico={<InventoryIcon sx={{ color: '#fff' }} />} label={t('sidebar.inventory')} to='/inventory' />
@@ -89,14 +86,12 @@ const Sidebar: React.FC = () => {
           to='/asset_maintainance'
         />
       </List>
-      
+
       <BottomLogoContainer>
-      <BottomTextPoweredBy>
-        Powered By
-      </BottomTextPoweredBy>
-        <Image src={'/Sidebar/NTDC.png'} alt='event_zero_logo' layout='fill' objectFit='contain'  />
-      <div>
-        <BottomTextNTDC>National Transmission Despatch Company</BottomTextNTDC>
+        <BottomTextPoweredBy>Powered By</BottomTextPoweredBy>
+        <Image src={'/Sidebar/NTDC.png'} alt='event_zero_logo' layout='fill' objectFit='contain' />
+        <div>
+          <BottomTextNTDC>National Transmission Despatch Company</BottomTextNTDC>
         </div>
       </BottomLogoContainer>
     </SidebarDrawer>
