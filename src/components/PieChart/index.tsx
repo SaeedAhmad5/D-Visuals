@@ -16,12 +16,22 @@ const ChartSvg = styled(PieChart)`
     height: 278px;
   }
 `;
+const TooltipContainer = styled.div`
+  padding: 15px;
+  background: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.goblin};
+  border-radius: 12px;
+`;
+const TooltipHead = styled.div`
+  font-weight: 600;
+`;
 
 type DataTypes = {
   name: string;
   value: number;
   dy?: number;
   color: string;
+  Total_Items?: string;
 };
 interface PropTypes {
   data: DataTypes[];
@@ -29,9 +39,21 @@ interface PropTypes {
   hideInnerRadius?: boolean;
   noMargin?: boolean;
   finance?: boolean;
+  totalProduct?: boolean;
+  tooltip?: boolean;
+  totalCapacity?: number;
 }
 
-const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: PropTypes) => {
+const PieChartData = ({
+  colors,
+  data,
+  hideInnerRadius,
+  noMargin,
+  finance,
+  totalProduct,
+  totalCapacity,
+  tooltip,
+}: PropTypes) => {
   const RADIAN = Math.PI / 180;
 
   const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent }: any) => {
@@ -58,7 +80,23 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
       </>
     );
   };
-
+  /* eslint-disable */
+  const renderCustomTooltip = (props: any) => {
+    const { active, payload } = props;
+    if (active && payload && payload.length) {
+      const dataItem = payload[0].payload;
+      return (
+        <TooltipContainer>
+          <TooltipHead>Total Capcity (sq. ft.): {totalCapacity}</TooltipHead>
+          <TooltipHead>
+            {dataItem.name}: {dataItem.value}
+          </TooltipHead>
+          {dataItem.current_level && <TooltipHead>Current Level of Stocks: {dataItem.current_level}</TooltipHead>}
+        </TooltipContainer>
+      );
+    }
+    return null;
+  };
   return (
     <>
       <ChartContainer minHeight={400} width={'100%'} $margin={noMargin}>
@@ -82,7 +120,7 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
             />
             {!hideInnerRadius && (
               <>
-                {!finance && data ? (
+                {!totalProduct && !finance && data ? (
                   data.map(item => (
                     <Label
                       key={`label-${item.name}`}
@@ -95,15 +133,30 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
                     />
                   ))
                 ) : (
-                  <Label
-                    key={'50M'}
-                    value={'50M'}
-                    position='center'
-                    fontSize={30}
-                    fontWeight={800}
-                    fill={'#10101'}
-                    dy={0}
-                  />
+                  <>
+                    {!totalProduct ? (
+                      <Label
+                        key={'50M'}
+                        value={'50M'}
+                        position='center'
+                        fontSize={30}
+                        fontWeight={800}
+                        fill={'#10101'}
+                        dy={0}
+                      />
+                    ) : (
+                      data.map(item => (
+                        <Label
+                          key={`label-${item.name}`}
+                          value={!totalCapacity ? `${item.value}` : totalCapacity}
+                          position='center'
+                          fontSize={30}
+                          fontWeight={500}
+                          dy={0}
+                        />
+                      ))
+                    )}
+                  </>
                 )}
               </>
             )}
@@ -112,14 +165,12 @@ const PieChartData = ({ colors, data, hideInnerRadius, noMargin, finance }: Prop
               <Cell key={`cell-${index}`} fill={colors[index % colors.length]} stroke='none' strokeWidth={0} />
             ))}
           </Pie>
-          
           {!finance ? (
             <Legend layout='horizontal' align='center' verticalAlign='bottom' />
           ) : (
             <Legend layout='vertical' align='right' verticalAlign='bottom' />
           )}
-
-          <Tooltip />
+          {tooltip ? <Tooltip content={renderCustomTooltip} /> : <Tooltip />}
         </ChartSvg>
       </ChartContainer>
     </>

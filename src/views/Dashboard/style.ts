@@ -50,10 +50,10 @@ export const ChartWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-export const PieChartWrapper = styled.div`
+export const PieChartWrapper = styled.div<{ $width?: string; $height?: boolean }>`
   box-sizing: border-box;
   padding: 19px 26px;
-  width: 330px;
+  width: ${props => props.$width || '330px'};
   min-height: 405px;
   height: 100%;
   background: ${({ theme }) => theme.colors.white};
@@ -80,8 +80,8 @@ export const LineChartWrapper = styled(PieChartWrapper)<{ $width?: string; $heig
   min-height: ${props => (props.$height ? '400px' : '465px')};
 `;
 
-export const TableWrapper = styled.div`
-  width: 52%;
+export const TableWrapper = styled.div<{ $width?: string; $height?: boolean }>`
+  width: ${props => props.$width || '52%'};
   padding: 20px;
   height: 400px;
   background: ${({ theme }) => theme.colors.white};
@@ -98,4 +98,11 @@ export const FlexRow = styled.div`
 export const CustomButton = styled.div`
   width: 182px;
   height: 44px;
+`;
+export const GraphHead = styled.div`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: ${({ theme }) => theme.colors.black};
 `;

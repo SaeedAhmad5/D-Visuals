@@ -97,6 +97,15 @@
   "inventory": {
     "FirstLinkText": "Home",
     "breadcrumbFirstLinkText": "Inventory",
+    "valueByItem": "Inventory Value By Item",
+    "itemsByStatus": "Items By Status",
+    "pieChartTitle": "Stock",
+    "inventoryStatus": "Inventory Status",
+    "warehouseUtilization": "Warehouse Utilization",
+    "totalCapacity": "Total Capacity (sq. ft.)",
+    "demandForecasting": "Demand Forecasting",
+    "inventoryAging": "Inventory Aging",
+    "stockoutsAndBackorders": "Stockouts and Backorders",
     "header": "Inventory / SCM"
   },
   "hr": {

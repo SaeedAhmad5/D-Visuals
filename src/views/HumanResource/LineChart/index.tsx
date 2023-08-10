@@ -23,12 +23,13 @@ interface PropTypes {
   data: DataTypes[];
   Cp?: boolean;
   Tq?: boolean;
+  df?: boolean;
   expense?: boolean;
   profitLose?: boolean;
   revenue?: boolean;
 }
 
-const LineChartComponent = ({ data, Cp, Tq, expense, profitLose, revenue }: PropTypes) => {
+const LineChartComponent = ({ data, Cp, Tq, df, expense, profitLose, revenue }: PropTypes) => {
   const formatYAxisTick = (tickValue: number) => `${tickValue}%`;
   const tooltipFormatter: any = (value: any) => `${value}%`;
   const AreaTooltipFormatter: any = (value: any) => `${value} Year`;
@@ -38,14 +39,12 @@ const LineChartComponent = ({ data, Cp, Tq, expense, profitLose, revenue }: Prop
       <ChartContainer>
         {!Tq ? (
           <LineChart width={500} height={300} data={data}>
-           
-            {expense ? (
-              <XAxis dataKey='month' padding={{ left: 30, right: 30 }} />
-            ) : (
-              <XAxis dataKey={profitLose?'month':'year'} />
-            )}
+            <XAxis
+              dataKey={expense ? (profitLose ? 'month' : 'year') : !df ? 'year' : 'month'}
+              padding={{ left: 30, right: 30 }}
+            />
             {!Cp ? (
-              <YAxis tickFormatter={formatYAxisTick} />
+              <YAxis tickFormatter={!df ? formatYAxisTick : null} />
             ) : (
               <>
                 <YAxis
@@ -66,9 +65,9 @@ const LineChartComponent = ({ data, Cp, Tq, expense, profitLose, revenue }: Prop
               </>
             )}
             <Tooltip formatter={tooltipFormatter} />
-            {!expense ? (
+            {!Cp ? (
               <>
-                {!Cp ? (
+                {!expense ? (
                   <Line type='monotone' dataKey='Effectiveness' stroke='#ff0003' activeDot={{ r: 8 }} />
                 ) : (
                   <>
@@ -90,13 +89,17 @@ const LineChartComponent = ({ data, Cp, Tq, expense, profitLose, revenue }: Prop
               </>
             ) : (
               <>
-                <Line type='monotone' dataKey='Expenses' stroke='#ff0003' activeDot={{ r: 8 }} />
-                <Line type='monotone' dataKey='Salary' stroke='#587c45' activeDot={{ r: 8 }} />
-                <Line type='monotone' dataKey='FixCost' stroke='#127aa9' activeDot={{ r: 8 }} />
+                {!df ? (
+                  <Line type='monotone' dataKey='Effectiveness' stroke='#ff0003' activeDot={{ r: 8 }} />
+                ) : (
+                  <>
+                    <Line type='monotone' dataKey='Forecasted_Demand' stroke='#ff0003' activeDot={{ r: 8 }} />
+                    <Line type='monotone' dataKey='Actual_Demand' stroke='#043db9' activeDot={{ r: 8 }} />
+                  </>
+                )}
               </>
             )}
-
-            {!expense ? Cp ? <Legend /> : null : <Legend />}
+            {!df ? Cp ? <Legend /> : null : <Legend />}
           </LineChart>
         ) : (
           <AreaChart
