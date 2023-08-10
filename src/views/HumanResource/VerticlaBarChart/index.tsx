@@ -20,10 +20,15 @@ type DataTypes = {
 interface PropTypes {
   data: DataTypes[];
   Ole?: Boolean;
+  account?: Boolean;
+  inventory?: Boolean;
+  assets?: boolean;
 }
 
-const VerticlaBarChart = ({ data, Ole }: PropTypes) => {
+const VerticlaBarChart = ({ data, Ole, account, inventory, assets }: PropTypes) => {
   const tooltipFormatter: any = (value: any) => `${value}%`;
+  const accountTooltip: any = (value: any) => `$${value}K`;
+  const formatYAxisTick = (tickValue: number) => `$${tickValue}k`;
 
   return (
     <ChartWrapper>
@@ -40,13 +45,40 @@ const VerticlaBarChart = ({ data, Ole }: PropTypes) => {
           }}
           barSize={35}
         >
-          <XAxis dataKey='name' scale='point' padding={{ left: 10, right: 10 }} />
-          {!Ole ? <YAxis /> : null}
-          <Tooltip formatter={tooltipFormatter} />
+          <XAxis
+            dataKey={!assets ? (inventory ? 'month' : 'name') : 'month'}
+            scale='point'
+            padding={{ left: 10, right: 10 }}
+          />
+          {!account ? !Ole ? <YAxis /> : null : <YAxis tickFormatter={formatYAxisTick} />}
+          <Tooltip
+            formatter={
+              !inventory
+                ? !assets
+                  ? !account
+                    ? tooltipFormatter
+                    : accountTooltip
+                  : accountTooltip
+                : tooltipFormatter
+            }
+          />
           <Bar
-            dataKey={!Ole ? 'Employees' : 'Effectiveness'}
-            fill={!Ole ? '#8884d8' : '#e92f32'}
+            dataKey={
+              !assets
+                ? !inventory
+                  ? !account
+                    ? !Ole
+                      ? 'Employees'
+                      : 'Effectiveness'
+                    : 'Burn'
+                  : 'inventory'
+                : 'assets'
+            }
+            fill={
+              !assets ? (!inventory ? (!account ? (!Ole ? '#8884d8' : '#e92f32') : '#276b40') : '#587c45') : '#619ed6'
+            }
             background={{ fill: '#eee' }}
+            barSize={!assets ? (inventory ? 20 : null) : 20}
           />
         </BarChart>
       </ChartContainer>
