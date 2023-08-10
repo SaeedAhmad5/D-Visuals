@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import PersonOffIcon from '@mui/icons-material/PersonOff';
 import PeopleIcon from '@mui/icons-material/People';
@@ -29,6 +29,15 @@ import {
   totalEmployees,
 } from '@/constants/humanResource';
 import { JobSatisficationDataColumn, JobSatisficationDataRow } from '@/constants/events';
+import { useAppDispatch, useAppSelector } from '@/redux';
+import {
+  selectAgeBandData,
+  selectAllHrData,
+  selectFilteredGenderData,
+  selectFilteredHrData,
+  selectFilteredRetiredEmployeeData,
+} from '@/redux/slices/humanResource/selectors';
+import { fetchAllHrDataThunk } from '@/redux/slices/humanResource/thunk';
 
 import {
   ChartWrapper,
@@ -55,6 +64,29 @@ export interface ColumnDataInterface {
 const HumanResource = () => {
   const { t } = useTranslation('common');
 
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllHrDataThunk());
+  }, []);
+
+  const hrData = useAppSelector(selectAllHrData);
+  const filteredHrAttritionCount = useAppSelector(selectFilteredHrData('Yes'));
+  const HrActiveEmployeeCount = useAppSelector(selectFilteredHrData('No'));
+  const filteredMaleGenderData = useAppSelector(selectFilteredGenderData('Male'));
+  const filteredFemaleGenderData = useAppSelector(selectFilteredGenderData('Female'));
+  const filteredRetiredEmployeeData = useAppSelector(selectFilteredRetiredEmployeeData('0'));
+  const ageBandData = useAppSelector(selectAgeBandData);
+
+  // Calculate average age using useMemo
+  const averageAge = useMemo(() => {
+    const totalEmployees = hrData.length;
+    const ageSum = hrData.reduce((sum, item) => sum + item.Age, 0);
+
+    return totalEmployees > 0 ? ageSum / totalEmployees : 0;
+  }, [hrData]);
+  // eslint-disable-next-line
+  console.log(ageBandData);
   return (
     <MainWrapper>
       <Header>
@@ -66,10 +98,10 @@ const HumanResource = () => {
       </Header>
       <CustomHeader>{t('hr.header')}</CustomHeader>
       <CardsWrapper>
-        <HRCard data={totalEmployees} icon={<PeopleIcon />} />
-        <HRCard data={activeEmployees} icon={<EmojiPeopleIcon />} />
-        <HRCard data={attritionEmployees} icon={<PersonOffIcon />} />
-        <HRCard data={avgAge} icon={<TodayIcon />} />
+        <HRCard data={totalEmployees} icon={<PeopleIcon />} totalEmployee={hrData.length} />
+        <HRCard data={activeEmployees} icon={<EmojiPeopleIcon />} activeEmployee={HrActiveEmployeeCount.length} />
+        <HRCard data={attritionEmployees} icon={<PersonOffIcon />} attrition={filteredHrAttritionCount.length} />
+        <HRCard data={avgAge} icon={<TodayIcon />} averageAge={averageAge.toFixed()} />
       </CardsWrapper>
       <ChartWrapper>
         <PieChartWrapper>
@@ -78,7 +110,13 @@ const HumanResource = () => {
             <ManIcon style={{ color: '#80CC28', fontSize: '30px' }} />
             <WomanIcon style={{ color: '#DD7596', position: 'absolute', fontSize: '30px', left: '110px' }} />
           </ChartHead>
-          <PieChartData data={pieChartData} colors={COLORS} />
+          <PieChartData
+            data={pieChartData}
+            filteredMaleGenderData={filteredMaleGenderData.length}
+            filteredFemaleGenderData={filteredFemaleGenderData.length}
+            colors={COLORS}
+            gender
+          />
         </PieChartWrapper>
         <LineChartWrapper>
           <GenericTitle>{t('hr.barChartTitle')}</GenericTitle>
@@ -89,7 +127,12 @@ const HumanResource = () => {
               height: '100%',
             }}
           >
-            <Barchart data={barChartData} />
+            <Barchart
+              data={barChartData}
+              TotalEmployees={hrData.length}
+              activeEmployee={HrActiveEmployeeCount.length}
+              retiredEmployee={filteredRetiredEmployeeData.length}
+            />
           </div>
         </LineChartWrapper>
         <LineChartWrapper>

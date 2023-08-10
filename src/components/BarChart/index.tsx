@@ -38,9 +38,22 @@ interface PropTypes {
   label?: boolean;
   color?: string;
   itemStatus?: boolean;
+  TotalEmployees?: number;
+  activeEmployee?: number;
+  retiredEmployee?: number;
 }
 
-const Barchart = ({ data, barsize, isActive, label, color, itemStatus }: PropTypes) => {
+const Barchart = ({
+  data,
+  barsize,
+  isActive,
+  label,
+  color,
+  itemStatus,
+  TotalEmployees,
+  activeEmployee,
+  retiredEmployee,
+}: PropTypes) => {
   const { t } = useTranslation('common');
 
   return (
@@ -71,7 +84,20 @@ const Barchart = ({ data, barsize, isActive, label, color, itemStatus }: PropTyp
           <Tooltip />
           {isActive && <CartesianGrid horizontal={false} />}
 
-          <Bar dataKey='No' barSize={barsize || 15} fill={color ? color : '#8884d8'}>
+          <Bar
+            dataKey={
+              !TotalEmployees
+                ? 'No'
+                : item =>
+                    item.name === 'Total Employee'
+                      ? TotalEmployees
+                      : item.name === 'Active Employee'
+                      ? activeEmployee
+                      : retiredEmployee
+            }
+            barSize={barsize || 15}
+            fill={color ? color : '#8884d8'}
+          >
             {label && <LabelList dataKey='No' position='right' fill='#555' />}
           </Bar>
         </ComposedChart>

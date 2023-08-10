@@ -27,6 +27,8 @@ interface PropTypes {
 
 const VerticlaBarChart = ({ data, Ole, Count, status, stock }: PropTypes) => {
   const tooltipFormatter: any = (value: any) => `${value}%`;
+  const accountTooltip: any = (value: any) => `$${value}K`;
+  const formatYAxisTick = (tickValue: number) => `$${tickValue}k`;
 
   return (
     <ChartWrapper>
@@ -44,17 +46,38 @@ const VerticlaBarChart = ({ data, Ole, Count, status, stock }: PropTypes) => {
           barSize={35}
         >
           {!status ? (
-            <XAxis dataKey='name' scale='point' padding={{ left: 10, right: 10 }} />
+            <XAxis
+              dataKey={!stock ? (!status ? (!Ole ? 'Employees' : 'Effectiveness') : 'Count') : 'name'}
+              scale='point'
+              padding={{ left: 10, right: 10 }}
+            />
           ) : (
-            <XAxis dataKey='year' scale='point' padding={{ left: 50, right: 50 }} />
+            <XAxis
+              dataKey={!stock ? (!status ? 'name' : 'year') : 'name'}
+              scale='point'
+              padding={{ left: !stock ? 10 : 50, right: !stock ? 10 : 50 }}
+            />
           )}
-          {!status ? !Ole ? <YAxis /> : null : null}
-          <Tooltip formatter={!status ? tooltipFormatter : null} />
+          {!status && !stock ? <YAxis tickFormatter={formatYAxisTick} /> : null}
+          <Tooltip
+            formatter={
+              !status
+                ? tooltipFormatter
+                : !inventory
+                ? !assets
+                  ? !account
+                    ? tooltipFormatter
+                    : accountTooltip
+                  : accountTooltip
+                : tooltipFormatter
+            }
+          />
           {!status ? (
             <Bar
               dataKey={!Count ? (!Ole ? 'Employees' : 'Effectiveness') : 'Count'}
               fill={!Count ? (!Ole ? '#8884d8' : '#e92f32') : '#057311'}
               background={{ fill: '#eee' }}
+              barSize={!Count ? 20 : null}
             />
           ) : (
             <>

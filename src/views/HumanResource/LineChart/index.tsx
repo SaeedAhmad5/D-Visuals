@@ -24,9 +24,12 @@ interface PropTypes {
   Cp?: boolean;
   Tq?: boolean;
   df?: boolean;
+  expense?: boolean;
+  profitLose?: boolean;
+  revenue?: boolean;
 }
 
-const LineChartComponent = ({ data, Cp, Tq, df }: PropTypes) => {
+const LineChartComponent = ({ data, Cp, Tq, df, expense, profitLose, revenue }: PropTypes) => {
   const formatYAxisTick = (tickValue: number) => `${tickValue}%`;
   const tooltipFormatter: any = (value: any) => `${value}%`;
   const AreaTooltipFormatter: any = (value: any) => `${value} Year`;
@@ -36,7 +39,10 @@ const LineChartComponent = ({ data, Cp, Tq, df }: PropTypes) => {
       <ChartContainer>
         {!Tq ? (
           <LineChart width={500} height={300} data={data}>
-            <XAxis dataKey={!df ? 'year' : 'month'} padding={{ left: 30, right: 30 }} />
+            <XAxis
+              dataKey={expense ? (profitLose ? 'month' : 'year') : !df ? 'year' : 'month'}
+              padding={{ left: 30, right: 30 }}
+            />
             {!Cp ? (
               <YAxis tickFormatter={!df ? formatYAxisTick : null} />
             ) : (
@@ -44,18 +50,44 @@ const LineChartComponent = ({ data, Cp, Tq, df }: PropTypes) => {
                 <YAxis
                   tickFormatter={formatYAxisTick}
                   yAxisId='left'
-                  label={{ value: 'Contract', angle: -90, position: 'insideLeft' }}
+                  label={{ value: !revenue ? (profitLose ? '' : 'Contract') : '', angle: -90, position: 'insideLeft' }}
                 />
                 <YAxis
                   tickFormatter={formatYAxisTick}
                   yAxisId='right'
-                  label={{ value: 'Permanent', angle: -270, position: 'insideRight' }}
+                  label={{
+                    value: !revenue ? (profitLose ? '' : 'Permanent') : '',
+                    angle: -270,
+                    position: 'insideRight',
+                  }}
                   orientation='right'
                 />
               </>
             )}
             <Tooltip formatter={tooltipFormatter} />
             {!Cp ? (
+              <>
+                {!expense ? (
+                  <Line type='monotone' dataKey='Effectiveness' stroke='#ff0003' activeDot={{ r: 8 }} />
+                ) : (
+                  <>
+                    <Line
+                      yAxisId='left'
+                      type='monotone'
+                      dataKey={!revenue ? (profitLose ? 'profit' : 'contract') : 'Budgeted_Revenue'}
+                      stroke='#619ed6'
+                      activeDot={{ r: 8 }}
+                    />
+                    <Line
+                      yAxisId='right'
+                      type='monotone'
+                      dataKey={!revenue ? (profitLose ? 'loss' : 'permanent') : 'Actual_Revenue'}
+                      stroke='#e48f1b'
+                    />
+                  </>
+                )}
+              </>
+            ) : (
               <>
                 {!df ? (
                   <Line type='monotone' dataKey='Effectiveness' stroke='#ff0003' activeDot={{ r: 8 }} />
@@ -65,12 +97,6 @@ const LineChartComponent = ({ data, Cp, Tq, df }: PropTypes) => {
                     <Line type='monotone' dataKey='Actual_Demand' stroke='#043db9' activeDot={{ r: 8 }} />
                   </>
                 )}
-              </>
-            ) : (
-              <>
-                {' '}
-                <Line yAxisId='left' type='monotone' dataKey='contract' stroke='#4cbfff' activeDot={{ r: 8 }} />
-                <Line yAxisId='right' type='monotone' dataKey='permanent' stroke='#043db9' />
               </>
             )}
             {!df ? Cp ? <Legend /> : null : <Legend />}
@@ -88,7 +114,6 @@ const LineChartComponent = ({ data, Cp, Tq, df }: PropTypes) => {
               bottom: -5,
             }}
           >
-            <XAxis dataKey='year' label={{ value: 'Years at Company', angle: 0 }} />
             <YAxis label={{ value: 'Notices', angle: -90, position: 'insideLeft' }} />
             <Tooltip labelFormatter={AreaTooltipFormatter} />
             <Area type='monotone' dataKey='notices' stroke='#4cbfff' fill='#4cbfff' />
