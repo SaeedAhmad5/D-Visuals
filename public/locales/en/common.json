@@ -141,7 +141,12 @@
     "breadcrumbSecondText": "Finance",
     "breadcrumbThirdTextOrganization": "All",
     "header": "Finance",
-    "profitPieChart": "Net Profit"
+    "profitPieChart": "Net Profit",
+    "expenses": "Expenses",
+    "BurnBarChart": "Burn",
+    "InventoryBarChart": "Inventory Expenses",
+    "profitLose": "Profit Vs Loss",
+    "AssetsBarChart": "Assets Cost"
   },
   "projectSystem": {
     "breadcrumbFirstLinkText": "Home",

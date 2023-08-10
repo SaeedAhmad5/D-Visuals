@@ -1,5 +1,13 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from 'recharts';
 import styled from 'styled-components';
 
 const ChartContainer = styled(ResponsiveContainer)`
@@ -61,6 +69,7 @@ const VerticlaBarChart = ({ data, Ole, Count, status, stock, inventory, assets, 
               padding={{ left: !stock ? 10 : 50, right: !stock ? 10 : 50 }}
             />
           )}
+
           {!status && !stock ? <YAxis tickFormatter={formatYAxisTick} /> : null}
           <Tooltip
             formatter={
